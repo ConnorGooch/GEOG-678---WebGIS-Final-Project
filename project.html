@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Display a map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="C:\Users\Administrator\Documents\College\GEOG 678 - WebGIS\Lecture\styles.css">
+</head>
+
+<body>
+    <div class="header">
+        <nav>
+            <ul>
+                <li class="active"><a href="C:\Users\Administrator\Documents\College\GEOG 678 - WebGIS\Lecture"><i
+                            class="fa fa-about"></i>Home</a>
+                </li>
+                <li><a href="C:\Users\Administrator\Documents\College\GEOG 678 - WebGIS\Lecture\goal.html">Goal</a></li>
+                <li><a href="C:\Users\Administrator\Documents\College\GEOG 678 - WebGIS\Lecture\survey.html">Survey</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="title">
+        <h1>Visualizing Bicycle and Exercise Segments with JavaScript</h1>
+    </div>
+    <h4>Created by: Connor Gooch, Ethan John, Cameron Hurst, Sierra Kostic, and Winston Waldrip</h4>
+    <p style="text-align: center;">Group Project for WebGIS at Texas A&M University</p>
+    <h2>
+        General Use and Function
+    </h2>
+    <p style="text-align: center;">
+        In order to view Strava segments over a specific area, enter the desired latitude, longitude, and zoom
+        level and press the “Update Map” button. <br> Once pressed, the map and table will be updated to display the
+        top 10 segments through Strava API, which have been visualized to display <br> a range of difficulty
+        depending on the distance of the segment through a color gradient of green being of short distance and
+        red being of long distance.
+    </p>
+    <br>
+    <div id="map-controls">
+        <label for="startLat">Latitude:</label>
+        <input type="text" id="startLat" value="30.6279">
+        <br>
+        <label for="startLng">Longitude:</label>
+        <input type="text" id="startLng" value="-96.3344">
+        <br>
+        <label for="zoomLevel">Zoom Level:</label>
+        <input type="text" id="zoomLevel" value="12">
+        <br>
+        <label for="activity-type">Activity Type:</label>
+        <select id="activity-type">
+            <option value="cycling">Cycling</option>
+            <option value="running">Running</option>
+        </select>
+        <div id="city-buttons">
+            <button id="new-york-btn">New York</button>
+            <button id="los-angeles-btn">Los Angeles</button>
+            <button id="chicago-btn">Chicago</button>
+            <button id="houston-btn">Houston</button>
+            <button id="phoenix-btn">Phoenix</button>
+            <button id="college-station-btn">College Station</button>
+        </div>
+        <button id="submitBtn">Update Map</button>
+    </div>
+    <br>
+    <div id="map">
+        <a href="https://www.maptiler.com"><img src="https://api.maptiler.com/resources/logo.svg"
+                alt="MapTiler logo"></a>
+    </div>
+    <br>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="Polyline.encoded.js"></script>
+    <script src="Strava_api.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const newYorkBtn = document.getElementById("new-york-btn");
+            const losAngelesBtn = document.getElementById("los-angeles-btn");
+            const chicagoBtn = document.getElementById("chicago-btn");
+            const houstonBtn = document.getElementById("houston-btn");
+            const phoenixBtn = document.getElementById("phoenix-btn");
+            const collegeStationBtn = document.getElementById("college-station-btn");
+
+            newYorkBtn.addEventListener("click", function () {
+                updateMap(40.7128, -74.0060, 10);
+            });
+
+            losAngelesBtn.addEventListener("click", function () {
+                updateMap(34.0522, -118.2437, 10);
+            });
+
+            chicagoBtn.addEventListener("click", function () {
+                updateMap(41.8781, -87.6298, 10);
+            });
+
+            houstonBtn.addEventListener("click", function () {
+                updateMap(29.7604, -95.3698, 10);
+            });
+
+            phoenixBtn.addEventListener("click", function () {
+                updateMap(33.4484, -112.0740, 10);
+            });
+
+            collegeStationBtn.addEventListener("click", function () {
+                updateMap(30.6279, -96.3344, 12);
+            });
+
+            function updateMap(lat, lng, zoom) {
+                document.getElementById('startLat').value = lat;
+                document.getElementById('startLng').value = lng;
+                document.getElementById('zoomLevel').value = zoom;
+            }
+        });
+    </script>
+    <div class="info_and_credits">
+        <p>This project was made possible thanks to the Strava API, Leaflet, and Esri. This project uses Strava API to
+            fetch
+            and display Strava segments based on their geographic location and activity type,
+            and then classify them from green to red based on the segment's distance. This is a tool that we hope
+            people
+            can
+            use to better visualize and understand workout segments, as well as a general
+            difficulty based on the color gradient. For more information on Strava and Strava API, please visit <a
+                href="https://developers.strava.com/docs/reference/">Strava API Documentation</a>.
+        </p>
+    </div>
+</body>
+
+</html>
